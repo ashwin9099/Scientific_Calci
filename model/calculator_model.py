@@ -1,25 +1,42 @@
 import math
-from typing import List
-
 class CalculatorModel:
-  
-  def evaluate(self, expression):
-    try:
-      expression = expression.replace("^", "**")
-      expression = expression.replace("√", "math.sqrt")
-      expression = expression.replace("sin", "math.sin")
-      expression = expression.replace("cos", "math.cos")
-      expression = expression.replace("tan", "math.tan")
-      expression = expression.replace("log", "math.log")
-      expression = expression.replace("ln", "math.log")
-      expression = expression.replace("π", str(math.pi))
-      expression = expression.replace("e", str(math.e)) # eulers number
-      
-      
-      if '%' in expression:                             # % to  decimal
-        expression = expression.replace("%", '/100')
-        
-      result = eval(expression, {'math': math, '__builtins__': None}, {})
-      return round(result, 10) if isinstance(result, float) else result
-    except:
-      return 'Error'
+    def add(self, a, b):
+        return a + b
+
+    def subtract(self, a, b):
+        return a - b
+
+    def multiply(self, a, b):
+        return a * b
+
+    def divide(self, a, b):
+        if b == 0:
+            raise ValueError("Cannot divide by zero")
+        return a / b
+
+    def power(self, a, b):
+        return a ** b
+
+    def square_root(self, a):
+        if a < 0:
+            raise ValueError("Cannot take square root of a negative number")
+        return math.sqrt(a)
+
+    def sin(self, a):
+        return math.sin(math.radians(a))
+
+    def cos(self, a):
+        return math.cos(math.radians(a))
+
+    def tan(self, a):
+        return math.tan(math.radians(a))
+
+    def log(self, a):
+        if a <= 0:
+            raise ValueError("Logarithm is only defined for positive numbers")
+        return math.log10(a)
+
+    def ln(self, a):
+        if a <= 0:
+            raise ValueError("Natural log is only defined for positive numbers")
+        return math.log(a)
