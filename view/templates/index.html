@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator">
+            <div class="brand">
+                <span class="model">PY-CALC 3000</span>
+            </div>
+            <div class="display-container">
+                <div class="expression" id="expression">0</div>
+                <div class="result" id="result">0</div>
+            </div>
+            <div class="keyboard">
+                <div class="row">
+                    <button class="key function" data-key="mc">MC</button>
+                    <button class="key function" data-key="mr">MR</button>
+                    <button class="key function" data-key="ms">MS</button>
+                    <button class="key function" data-key="m+">M+</button>
+                    <button class="key function" data-key="m-">M-</button>
+                </div>
+                <div class="row">
+                    <button class="key function" data-key="2nd">2nd</button>
+                    <button class="key function" data-key="square">x²</button>
+                    <button class="key function" data-key="cube">x³</button>
+                    <button class="key operation" data-key="^">^</button>
+                    <button class="key function" data-key="radical">√</button>
+                </div>
+                <div class="row">
+                    <button class="key function" data-key="factorial">x!</button>
+                    <button class="key function" data-key="sin">sin</button>
+                    <button class="key function" data-key="cos">cos</button>
+                    <button class="key function" data-key="tan">tan</button>
+                    <button class="key constant" data-key="pi">π</button>
+                </div>
+                <div class="row">
+                    <button class="key function" data-key="reciprocal">1/x</button>
+                    <button class="key function" data-key="log">log</button>
+                    <button class="key function" data-key="ln">ln</button>
+                    <button class="key constant" data-key="e">e</button>
+                    <button class="key operation" data-key="(">(</button>
+                </div>
+                <div class="row">
+                    <button class="key function" data-key="clear">AC</button>
+                    <button class="key number" data-key="7">7</button>
+                    <button class="key number" data-key="8">8</button>
+                    <button class="key number" data-key="9">9</button>
+                    <button class="key operation" data-key=")">)</button>
+                </div>
+                <div class="row">
+                    <button class="key function" data-key="clear-entry">CE</button>
+                    <button class="key number" data-key="4">4</button>
+                    <button class="key number" data-key="5">5</button>
+                    <button class="key number" data-key="6">6</button>
+                    <button class="key operation" data-key="*">×</button>
+                </div>
+                <div class="row">
+                    <button class="key function" data-key="backspace">⌫</button>
+                    <button class="key number" data-key="1">1</button>
+                    <button class="key number" data-key="2">2</button>
+                    <button class="key number" data-key="3">3</button>
+                    <button class="key operation" data-key="/">÷</button>
+                </div>
+                <div class="row">
+                    <button class="key function" data-key="ans">Ans</button>
+                    <button class="key number" data-key="0">0</button>
+                    <button class="key number" data-key=".">.</button>
+                    <button class="key operation" data-key="+">+</button>
+                    <button class="key operation" data-key="-">−</button>
+                </div>
+                <div class="row">
+                    <button class="key equals" data-key="equals">=</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>Python Scientific Calculator - Deployed on Heroku</p>
+        <p>Made with MVC Architecture</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,42 +1,100 @@
 import math
+import numpy as np
+
 class CalculatorModel:
-    def add(self, a, b):
-        return a + b
-
-    def subtract(self, a, b):
-        return a - b
-
-    def multiply(self, a, b):
-        return a * b
-
-    def divide(self, a, b):
-        if b == 0:
-            raise ValueError("Cannot divide by zero")
-        return a / b
-
-    def power(self, a, b):
-        return a ** b
-
-    def square_root(self, a):
-        if a < 0:
-            raise ValueError("Cannot take square root of a negative number")
-        return math.sqrt(a)
-
-    def sin(self, a):
-        return math.sin(math.radians(a))
-
-    def cos(self, a):
-        return math.cos(math.radians(a))
-
-    def tan(self, a):
-        return math.tan(math.radians(a))
-
-    def log(self, a):
-        if a <= 0:
-            raise ValueError("Logarithm is only defined for positive numbers")
-        return math.log10(a)
-
-    def ln(self, a):
-        if a <= 0:
-            raise ValueError("Natural log is only defined for positive numbers")
-        return math.log(a)
+    """
+    Model component of the MVC architecture.
+    Handles all calculation logic.
+    """
+    
+    def __init__(self):
+        self.memory = 0
+        self.ans = 0  # Stores the last calculated answer
+    
+    def evaluate(self, expression):
+        """
+        Evaluates a mathematical expression and returns the result.
+        
+        Args:
+            expression (str): The mathematical expression to evaluate
+            
+        Returns:
+            float: The result of the evaluation
+        """
+        try:
+            # Replace common mathematical functions with their numpy equivalents
+            expression = expression.replace("^", "**")
+            expression = expression.replace("sin(", "np.sin(")
+            expression = expression.replace("cos(", "np.cos(")
+            expression = expression.replace("tan(", "np.tan(")
+            expression = expression.replace("log(", "np.log10(")
+            expression = expression.replace("ln(", "np.log(")
+            expression = expression.replace("sqrt(", "np.sqrt(")
+            expression = expression.replace("π", "np.pi")
+            expression = expression.replace("pi", "np.pi")
+            expression = expression.replace("e", "np.e")
+            expression = expression.replace("Ans", str(self.ans))
+            
+            # Calculate the result
+            result = eval(expression, {"__builtins__": None}, {"np": np, "math": math})
+            
+            # Update the last answer
+            self.ans = result
+            
+            # Format the result to avoid unnecessary decimal places
+            if isinstance(result, (int, float)):
+                if result == int(result):
+                    return int(result)
+                else:
+                    # Limit to 10 decimal places
+                    return round(result, 10)
+            return result
+            
+        except Exception as e:
+            return f"Error: {str(e)}"
+    
+    def store_in_memory(self, value):
+        """Stores a value in calculator memory"""
+        try:
+            self.memory = float(value)
+            return True
+        except:
+            return False
+    
+    def recall_memory(self):
+        """Returns the value stored in memory"""
+        return self.memory
+    
+    def clear_memory(self):
+        """Clears the calculator memory"""
+        self.memory = 0
+        return True
+    
+    def calculate_special_function(self, function, value):
+        """
+        Calculates various special mathematical functions
+        
+        Args:
+            function (str): The name of the function
+            value (float): The input value
+            
+        Returns:
+            float: The result of the function
+        """
+        try:
+            value = float(value)
+            
+            if function == "square":
+                return value ** 2
+            elif function == "cube":
+                return value ** 3
+            elif function == "sqrt":
+                return math.sqrt(value)
+            elif function == "factorial":
+                return math.factorial(int(value))
+            elif function == "reciprocal":
+                return 1 / value
+            else:
+                return "Invalid function"
+        except Exception as e:
+            return f"Error: {str(e)}"
