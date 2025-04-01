@@ -2,10 +2,6 @@ from flask import render_template, request, jsonify
 from model.calculator_model import CalculatorModel
 
 class CalculatorController:
-    """
-    Controller component of the MVC architecture.
-    Handles communication between View and Model.
-    """
     
     def __init__(self, app):
         self.app = app

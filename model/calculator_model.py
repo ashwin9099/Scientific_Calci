@@ -2,27 +2,14 @@ import math
 import numpy as np
 
 class CalculatorModel:
-    """
-    Model component of the MVC architecture.
-    Handles all calculation logic.
-    """
     
     def __init__(self):
         self.memory = 0
-        self.ans = 0  # Stores the last calculated answer
+        self.ans = 0
     
     def evaluate(self, expression):
-        """
-        Evaluates a mathematical expression and returns the result.
         
-        Args:
-            expression (str): The mathematical expression to evaluate
-            
-        Returns:
-            float: The result of the evaluation
-        """
         try:
-            # Replace common mathematical functions with their numpy equivalents
             expression = expression.replace("^", "**")
             expression = expression.replace("sin(", "np.sin(")
             expression = expression.replace("cos(", "np.cos(")
@@ -35,19 +22,17 @@ class CalculatorModel:
             expression = expression.replace("e", "np.e")
             expression = expression.replace("Ans", str(self.ans))
             
-            # Calculate the result
+          
             result = eval(expression, {"__builtins__": None}, {"np": np, "math": math})
             
-            # Update the last answer
             self.ans = result
             
-            # Format the result to avoid unnecessary decimal places
             if isinstance(result, (int, float)):
                 if result == int(result):
                     return int(result)
                 else:
-                    # Limit to 10 decimal places
-                    return round(result, 10)
+                   
+                    return round(result, 10)  # Limit to 10 decimal places
             return result
             
         except Exception as e:
