@@ -2,6 +2,8 @@
 
 A modern, web-based scientific calculator built with Python using the MVC (Model-View-Controller) architecture. The calculator features a realistic UI that resembles physical scientific calculators.
 
+Project Link: https://scientific-calci.onrender.com/
+
 ## Features
 
 - Clean, modern UI resembling a real scientific calculator
