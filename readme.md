@@ -34,10 +34,6 @@ This calculator follows the Model-View-Controller architecture pattern:
 - **View** (`view/templates/` and `view/static/`): Contains the UI components and styling
 - **Controller** (`controller/calculator_controller.py`): Handles the communication between the Model and View
 
-## Live Demo
-
-The calculator is deployed on Heroku and can be accessed at: [https://python-scientific-calc.herokuapp.com/](https://python-scientific-calc.herokuapp.com/)
-
 ## Local Development
 
 1. Clone the repository
