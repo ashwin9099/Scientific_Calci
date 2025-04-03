@@ -1,22 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Elements
+  
   const expressionElement = document.getElementById('expression');
   const resultElement = document.getElementById('result');
   
-  // Calculator state
   let currentExpression = '';
   let currentResult = '0';
   let waitingForOperand = false;
   let memoryValue = 0;
   let secondMode = false;
   
-  // Update the display
   function updateDisplay() {
       expressionElement.textContent = currentExpression || '0';
       resultElement.textContent = currentResult;
   }
   
-  // Clear the calculator
   function clearCalculator() {
       currentExpression = '';
       currentResult = '0';
@@ -24,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
       updateDisplay();
   }
   
-  // Clear just the current entry
+
   function clearEntry() {
       currentResult = '0';
       if (waitingForOperand) {
@@ -33,8 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
       updateDisplay();
   }
   
-  // Backspace function
-  function backspace() {
+    function backspace() {
       if (currentExpression.length > 0) {
           currentExpression = currentExpression.slice(0, -1);
           updateDisplay();
@@ -51,7 +47,6 @@ document.addEventListener('DOMContentLoaded', function() {
       if (currentExpression === '0' && num !== '.') {
           currentExpression = num;
       } else if (num === '.' && currentExpression.includes('.')) {
-          // Prevent multiple decimal points
           return;
       } else {
           currentExpression += num;
@@ -60,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
       updateDisplay();
   }
   
-  // Handle operator input
+  
   function inputOperator(operator) {
       if (currentExpression === '' && operator !== '-') {
           return;
@@ -70,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
           waitingForOperand = false;
       }
       
-      // Map display symbols to actual operators
       const operatorMap = {
           '×': '*',
           '÷': '/',
@@ -82,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
       updateDisplay();
   }
   
-  // Handle function input
+
   function inputFunction(func) {
       if (func === 'clear') {
           clearCalculator();
@@ -109,7 +103,6 @@ document.addEventListener('DOMContentLoaded', function() {
           return;
       }
       
-      // Memory functions
       if (func === 'mc') {
           fetch('/memory', {
               method: 'POST',
@@ -221,7 +214,6 @@ document.addEventListener('DOMContentLoaded', function() {
           return;
       }
       
-      // Special functions
       const specialFuncs = ['sin', 'cos', 'tan', 'log', 'ln', 'radical', 'square', 'cube', 'factorial', 'reciprocal'];
       
       if (specialFuncs.includes(func)) {
@@ -230,7 +222,6 @@ document.addEventListener('DOMContentLoaded', function() {
               waitingForOperand = false;
           }
           
-          // Map button functions to expressions
           const funcMap = {
               'sin': 'sin(',
               'cos': 'cos(',
@@ -244,14 +235,11 @@ document.addEventListener('DOMContentLoaded', function() {
               'reciprocal': '^(-1)'
           };
           
-          // Add function to expression
           const expressionFunc = funcMap[func];
           if (expressionFunc) {
               if (func === 'square' || func === 'cube' || func === 'factorial' || func === 'reciprocal') {
-                  // These functions apply to the previous number
                   currentExpression += expressionFunc;
               } else {
-                  // These functions require a parameter
                   currentExpression += expressionFunc;
               }
               updateDisplay();
@@ -259,7 +247,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   }
   
-  // Handle constant input
   function inputConstant(constant) {
       if (waitingForOperand) {
           currentExpression = '';
@@ -276,7 +263,6 @@ document.addEventListener('DOMContentLoaded', function() {
       updateDisplay();
   }
   
-  // Calculate the result
   function calculate() {
       if (currentExpression === '') {
           return;
@@ -305,7 +291,6 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   }
   
-  // Add event listeners to calculator buttons
   document.querySelectorAll('.key').forEach(key => {
       key.addEventListener('click', () => {
           const keyType = key.className.split(' ')[1];  // Get the second class (number, operation, etc.)
@@ -331,16 +316,13 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   });
   
-  // Add keyboard support
   document.addEventListener('keydown', (event) => {
       const key = event.key;
       
-      // Prevent default action for calculator keys
       if (/[0-9+\-*/.=]|Enter|Backspace|Escape|Delete/.test(key)) {
           event.preventDefault();
       }
       
-      // Map keyboard keys to calculator functions
       if (/[0-9.]/.test(key)) {
           inputNumber(key);
       } else if (/[+\-*\/]/.test(key)) {
@@ -366,6 +348,5 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   });
   
-  // Initialize the display
   updateDisplay();
 });

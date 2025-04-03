@@ -9,7 +9,6 @@ class CalculatorController:
         self.setup_routes()
     
     def setup_routes(self):
-        """Sets up Flask routes for the application"""
         @self.app.route('/')
         def index():
             return render_template('index.html')
