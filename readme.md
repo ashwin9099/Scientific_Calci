@@ -2,6 +2,8 @@
 
 A modern, web-based scientific calculator built with Python using the MVC (Model-View-Controller) architecture. The calculator features a realistic UI that resembles physical scientific calculators.
 
+Project Link: https://scientific-calci.onrender.com/
+
 ## Features
 
 - Clean, modern UI resembling a real scientific calculator
@@ -31,10 +33,6 @@ This calculator follows the Model-View-Controller architecture pattern:
 - **Model** (`model/calculator_model.py`): Contains all the mathematical logic and calculation functions
 - **View** (`view/templates/` and `view/static/`): Contains the UI components and styling
 - **Controller** (`controller/calculator_controller.py`): Handles the communication between the Model and View
-
-## Live Demo
-
-The calculator is deployed on Heroku and can be accessed at: [https://python-scientific-calc.herokuapp.com/](https://python-scientific-calc.herokuapp.com/)
 
 ## Local Development
 
